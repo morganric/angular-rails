@@ -1,26 +1,15 @@
 
 <h1>
-  <%= @post.title %>
+  <%= link_to @post.title, @post.url, :target => "_blank" %>
 </h1>
 
 <p>
   <%= @post.url %>
 </p>
 
-
-
-
 <p>
-  <b><%= @post.views %> Views Remaining</b>
-  
+  <b><%= @post.views %>Views Remaining</b>
 </p>
-
-<p>
-  <%= link_to "<i class='icon icon-plus'></i>".html_safe, @post.url %>
-</p>
-
-
-
 
 <%= button_to 'Add Views', :controller => :posts, :action => "add_views", :method => :put, :num =>   10   %>
 

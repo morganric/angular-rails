@@ -3,9 +3,9 @@
 
   <div class="form-inputs">
     <%= f.input :url %>
-    <%= f.input :provider %>
-    <%= f.input :media_type %>
-    <%= f.input :title %>
+    <%= f.input :provider, as: :hidden %>
+    <%= f.input :media_type, as: :hidden %>
+    <%= f.input :title, as: :hidden %>
     <%= f.input :views %>
   </div>
 
