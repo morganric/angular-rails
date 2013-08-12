@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+
   # GET /posts
   # GET /posts.json
   def index
@@ -16,11 +17,12 @@ class PostsController < ApplicationController
     num = params[:num]
     @newviews = @views + num.to_i  
     @post.update_attributes({:views => @newviews })
+    @post.increases = @post.increases + 1
     if @post.save
         redirect_to @post, notice: "#{num} Views were added."
+    else
+      redirect_to @post, @post.errors, status: :unprocessable_entity 
     end
-
-
   end
 
   # GET /posts/1
@@ -64,9 +66,14 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+
     @post = Post.new(params[:post])
     @post.total = 0
     @post.increases = 0
+    @post.views = 101
+
+    embedly_title
+
 
     respond_to do |format|
       if @post.save
@@ -106,4 +113,19 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+  def embedly_title
+  require 'embedly'
+  # require 'json'
+  embedly_api = Embedly::API.new :key => 'de58199a853c4012893443678819d1f0'
+    url = @post.url
+    obj = embedly_api.oembed :url => url
+    @post.title = obj[0].title
+    # puts obj[0].marshal_dump
+    # json_obj = JSON.pretty_generate(obj[0].marshal_dump)
+    # puts json_obj
+  end
+
 end

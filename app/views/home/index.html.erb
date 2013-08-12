@@ -1,7 +1,4 @@
 
-<h1> 
-	<span style="text-decoration:underline;" >{{query}}</span>
-</h1>
 
 <!-- <label>Sort by:</label>
 <select ng-model="orderProp">
@@ -13,15 +10,15 @@
 <ul >
 	<li ng-repeat="post in posts | filter:query | orderBy:orderProp">
 	  <h2><%= link_to "{{post.title}}", "/posts/{{ post.id }}" %></h2>
-	  <span class="label">
-	  	<i class="icon-white icon-eye-close"></i> 
+	  <span class="label label-warning">
+	  	<i class="icon-white icon-arrow-down"></i> 
 	  	{{post.views}}
 	  </span>
-	  <span class="label">
+	  <span class="label label-primary">
 	  	<i class="icon-white icon-eye-open"></i>
 	  	{{post.total}}
 	  </span>
-	  <span class="label">
+	  <span class="label label-success">
 	  	<i class="icon-white icon-arrow-up"></i>
 	  	{{post.increases}}
 	  </span>
