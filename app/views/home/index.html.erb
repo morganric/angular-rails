@@ -1,4 +1,17 @@
 <h3>Home</h3>
-<% @users.each do |user| %>
-  <p>User: <%=link_to user.name, user %></p>
-<% end %>
+<p>Nothing here {{'yet' + '!'}}</p>
+<p>1 + 2 = {{ 1 + 2 }}</p>	
+
+<ul ng-controller="PostsCtrl">
+	<li ng-repeat="post in posts">
+	  {{post.title}}
+	  <p>{{post.url}}</p>
+	  <label>{{post.views}}</label>
+	</li>
+</ul>	
+
+<script>
+       angular.element(document).ready(function() {
+         angular.bootstrap(document, ['optionalModuleName']);
+       });
+</script>

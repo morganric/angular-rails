@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130812130625) do
+ActiveRecord::Schema.define(:version => 20130812144809) do
+
+  create_table "posts", :force => true do |t|
+    t.string   "url"
+    t.string   "provider"
+    t.string   "media_type"
+    t.string   "title"
+    t.integer  "views"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "roles", :force => true do |t|
     t.string   "name"
