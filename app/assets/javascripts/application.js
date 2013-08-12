@@ -27,6 +27,7 @@ app.controller("PostsCtrl", this.PostsCtrl = function($scope, $http) {
   return $http.get('/posts.json').success(function(data) {
     return $scope.posts = data;
   });
+  // $scope.orderProp = 'title';
 });
 
 

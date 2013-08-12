@@ -1,17 +1,22 @@
-<h3>Home</h3>
-<p>Nothing here {{'yet' + '!'}}</p>
-<p>1 + 2 = {{ 1 + 2 }}</p>	
 
-<ul ng-controller="PostsCtrl">
-	<li ng-repeat="post in posts">
-	  {{post.title}}
-	  <p>{{post.url}}</p>
-	  <label>{{post.views}}</label>
+<h1> 
+	<span style="text-decoration:underline;" >{{query}}</span>
+</h1>
+
+<!-- <label>Sort by:</label>
+<select ng-model="orderProp">
+  <option value="title">Alphabetical</option>
+  <option value="-views" selected="selected">Views</option>
+</select>
+ -->
+
+<ul >
+	<li ng-repeat="post in posts | filter:query | orderBy:orderProp">
+	  <h2><%= link_to "{{post.title}}", "/posts/{{ post.id }}" %></h2>
+	  <span class="label"><i class="icon-white icon-eye-close"></i> {{post.views}}</span>
+	  <span class="label"><i class="icon-white icon-eye-open"></i> {{post.total}}</span>
+	  <span class="label"><i class="icon-white icon-arrow-up"></i> {{post.increases}}</span>
 	</li>
-</ul>	
+</ul>
 
-<script>
-       angular.element(document).ready(function() {
-         angular.bootstrap(document, ['optionalModuleName']);
-       });
-</script>
+

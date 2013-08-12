@@ -1,5 +1,10 @@
 <%= link_to "Angular Rails", root_path, :class => 'brand' %>
 <ul class="nav">
+  <form class="navbar-search pull-left">
+  <input type="text" class="search-query" placeholder="Search" ng-model='query'>
+  </form>
+</ul>
+  <ul class="nav pull-right">
   <% if user_signed_in? %>
     <li>
     <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>
