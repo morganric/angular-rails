@@ -5,14 +5,19 @@
   <%= link_to @post.title, @post.url, :target => "_blank" %>
 </h1>
 
-<p id="content">
+<div id="content" class="flex-video">
   <%= link_to '', @post.url %>
-</p>
+</div>
+
+<p><%= @post.description %></p>
+<p><%= @post.provider_url %></p>
+<p><%= @post.thumbnail_url %></p>
 
 <p>
   <span class="label label-warning"><i class="icon-white icon-arrow-down"></i> <%= @post.views %></span>
-  <span class="label label-primary"><i class="icon-white icon-eye-open"></i> <%= @post.total %></span>
+  <span class="label label-info"><i class="icon-white icon-eye-open"></i> <%= @post.total %></span>
   <span class="label label-success"><i class="icon-white icon-arrow-up"></i> <%= @post.increases %></span>
+  <span class="label label-facebook"><i class="icon-white icon-thumbs-up"></i> <%= @post.title.length %></span>
 </p>
 
 <%= button_to 'Add Views', {:controller => :posts, :action => "add_views", :method => :put, :num =>   10} , :class => "btn"  %>

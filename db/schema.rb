@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130812190635) do
+ActiveRecord::Schema.define(:version => 20130813100010) do
 
   create_table "posts", :force => true do |t|
     t.string   "url"
@@ -19,10 +19,14 @@ ActiveRecord::Schema.define(:version => 20130812190635) do
     t.string   "media_type"
     t.string   "title"
     t.integer  "views"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.integer  "total"
     t.integer  "increases"
+    t.text     "description"
+    t.string   "thumbnail_url"
+    t.string   "provider_url"
+    t.string   "author_name"
   end
 
   create_table "roles", :force => true do |t|

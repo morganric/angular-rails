@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  load_and_authorize_resource
+  skip_authorize_resource :only => [:show, :index]
 
   # GET /posts
   # GET /posts.json
@@ -34,7 +36,7 @@ class PostsController < ApplicationController
     if @views > 0
       @new_views = @views - 1
       @post = Post.find(params[:id])
-      post.total = post.total + 1
+      @post.total = @post.total + 1
       @post.update_attributes({:views => @new_views })
       @post.save
     else
@@ -123,6 +125,12 @@ class PostsController < ApplicationController
     url = @post.url
     obj = embedly_api.oembed :url => url
     @post.title = obj[0].title
+    @post.provider = obj[0].provider_name
+    @post.media_type = obj[0].type
+    @post.description = obj[0].description
+    @post.thumbnail_url = obj[0].thumbnail_url
+    @post.provider_url = obj[0].provider_url
+    @post.author_name = obj[0].author_name
     # puts obj[0].marshal_dump
     # json_obj = JSON.pretty_generate(obj[0].marshal_dump)
     # puts json_obj
