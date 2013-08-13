@@ -1,5 +1,5 @@
 AngularRails::Application.configure do
-  # Settings specified here will take precedence over those in config/application.rb
+  # Settings specified here will take precedence over those in config/application.#!/usr/bin/env ruby -wKU
 
   # Code is not reloaded between requests
   config.cache_classes = true
