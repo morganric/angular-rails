@@ -1,5 +1,6 @@
 <div class="row">
 <div class="span8">
+<% if @posts == nil %>
 <ul >
 	<li ng-repeat="post in posts | filter:query | orderBy:orderProp">
 	  <a href="/posts/{{ post.id }}" ><img src="{{post.thumbnail_url}}" class="pull-left" height="100" width="100px" style="padding-right:20px;" /></a>
@@ -29,8 +30,9 @@
   <option value="-views" selected="selected">Views Remaining</option>
   <option value="-total" selected="selected">Total Views</option>
 </select>
-
-
+<% else %>
+<span>No posts as yet...</span>
+<% end %>
 </div>
 </div>
 
