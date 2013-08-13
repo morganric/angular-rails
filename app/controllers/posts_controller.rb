@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all( :order => "views DESC")
+    @posts = Post.all( :order => "total DESC")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -72,7 +72,8 @@ class PostsController < ApplicationController
     @post = Post.new(params[:post])
     @post.total = 0
     @post.increases = 0
-    @post.views = 101
+    @post.views = 100
+    @post.user_id = current_user.id
 
     embedly_title
 
@@ -131,6 +132,7 @@ class PostsController < ApplicationController
     @post.thumbnail_url = obj[0].thumbnail_url
     @post.provider_url = obj[0].provider_url
     @post.author_name = obj[0].author_name
+    @post.embed_code = obj[0].html
     # puts obj[0].marshal_dump
     # json_obj = JSON.pretty_generate(obj[0].marshal_dump)
     # puts json_obj

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130813100010) do
+ActiveRecord::Schema.define(:version => 20130813115315) do
 
   create_table "posts", :force => true do |t|
     t.string   "url"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(:version => 20130813100010) do
     t.string   "thumbnail_url"
     t.string   "provider_url"
     t.string   "author_name"
+    t.text     "embed_code"
+    t.integer  "user_id"
   end
 
   create_table "roles", :force => true do |t|
