@@ -18,7 +18,7 @@
 //= require angle-up
 //= require_tree ./angular
 
-// var app;
+var app;
 
 app = angular.module('Posts', []);
 
