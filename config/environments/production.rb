@@ -1,6 +1,6 @@
 AngularRails::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
-  config.assets.js_compressor = Sprockets::LazyCompressor.new { Uglifier.new(:mangle => false) }
+  # config.assets.js_compressor = Sprockets::LazyCompressor.new { Uglifier.new(:mangle => false) }
 
 
   # Code is not reloaded between requests
@@ -14,7 +14,7 @@ AngularRails::Application.configure do
   config.serve_static_assets = false
 
   # Compress JavaScripts and CSS
-  config.assets.compress = true
+  config.assets.compress = false
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = false
