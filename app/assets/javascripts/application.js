@@ -18,10 +18,7 @@
 //= require angle-up
 //= require_tree ./angular
 
-var app;
-
-app = angular.module('Posts', []);
-
+var app = angular.module('Posts', []);
 
 app.controller("PostsCtrl", this.PostsCtrl = function($scope, $http) {
   return $http.get('/posts.json').success(function(data) {
@@ -29,22 +26,3 @@ app.controller("PostsCtrl", this.PostsCtrl = function($scope, $http) {
   });
   // $scope.orderProp = 'title';
 });
-
-
-// app.controller("PostsCtrl", this.PostsCtrl = function($scope) {
-//   return $scope.posts = [
-//     {
-//       id: 1,
-//       title: "Title 1",
-//       intro: "This is posting 1 foo"
-//     }, {
-//       id: 2,
-//       title: "Title 2",
-//       intro: "This is posting 2 bar"
-//     }, {
-//       id: 3,
-//       title: "Title 3",
-//       intro: "This is posting 3 baz"
-//     }
-//   ];
-// });
