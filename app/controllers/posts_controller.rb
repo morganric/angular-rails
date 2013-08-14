@@ -1,6 +1,10 @@
 class PostsController < ApplicationController
+  include PostsHelper
+
   load_and_authorize_resource
   skip_authorize_resource :only => [:show, :index]
+
+
 
   # GET /posts
   # GET /posts.json
@@ -10,20 +14,6 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
-    end
-  end
-
- def add_views
-    @post = Post.find(params[:id])
-    @views = @post.views
-    num = params[:num]
-    @newviews = @views + num.to_i  
-    @post.update_attributes({:views => @newviews })
-    @post.increases = @post.increases + 1
-    if @post.save
-        redirect_to @post, notice: "#{num} Views were added."
-    else
-      redirect_to @post, @post.errors, status: :unprocessable_entity 
     end
   end
 
@@ -45,6 +35,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
+      format.js
       format.json { render json: @post }
     end
   end
@@ -68,25 +59,38 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+    new_url = params[:post][:url]
+    @exist = Post.find_by_url(params[:post]["url"])
 
-    @post = Post.new(params[:post])
-    @post.total = 0
-    @post.increases = 0
-    @post.views = 100
-    @post.user_id = current_user.id
-
-    embedly_title
-
-
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render json: @post, status: :created, location: @post }
+    if @exist
+      @exist.views = @exist.views + 10
+      if @exist.save
+      redirect_to post_url(@exist), notice: 'That post already exists here.... We added 10 views though.'
       else
-        format.html { render action: "new" }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+        render json: @exist.errors, status: :unprocessable_entity 
+      end 
+    else        
+      @post = Post.new(params[:post])
+      @post.total = 0
+      @post.increases = 0
+      @post.views = 100
+      @post.user_id = current_user.id
+
+
+      embedly_title(@post)
+
+
+      respond_to do |format|
+        if @post.save
+          format.html { redirect_to @post, notice: 'Post was successfully created.' }
+          format.json { render json: @post, status: :created, location: @post }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
       end
     end
+
   end
 
   # PUT /posts/1
@@ -115,27 +119,6 @@ class PostsController < ApplicationController
       format.html { redirect_to posts_url }
       format.json { head :no_content }
     end
-  end
-
-  private
-
-  def embedly_title
-  require 'embedly'
-  # require 'json'
-  embedly_api = Embedly::API.new :key => 'de58199a853c4012893443678819d1f0'
-    url = @post.url
-    obj = embedly_api.oembed :url => url
-    @post.title = obj[0].title
-    @post.provider = obj[0].provider_name
-    @post.media_type = obj[0].type
-    @post.description = obj[0].description
-    @post.thumbnail_url = obj[0].thumbnail_url
-    @post.provider_url = obj[0].provider_url
-    @post.author_name = obj[0].author_name
-    @post.embed_code = obj[0].html
-    # puts obj[0].marshal_dump
-    # json_obj = JSON.pretty_generate(obj[0].marshal_dump)
-    # puts json_obj
   end
 
 end

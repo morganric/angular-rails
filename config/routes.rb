@@ -1,7 +1,7 @@
 AngularRails::Application.routes.draw do
   resources :posts	
 
-  post "/posts/:id/add_views" => "posts#add_views"
+  post "/posts/:id/data" => "posts#data"
 
   authenticated :user do
     root :to => 'home#index'
