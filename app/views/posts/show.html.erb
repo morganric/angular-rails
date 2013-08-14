@@ -27,7 +27,7 @@
 	<p><% if @post.thumbnail_url %><%= image_tag @post.thumbnail_url %><% end %></p>
 	<p><% if @post.description %><%= @post.description %><% end %></p>
 	<p><% if @post.author_name %>by <%= @post.author_name %><% end %></p>
-	<p><% if @post.user %>via <%= link_to @post.user.name, @post.user %><% end %><% if @post.provider_url %>on <%= link_to @post.provider, @post.provider_url, :target => "_blank" %><% end %></p>
+	<p><% if @post.user %>posted by <%= link_to @post.user.name, @post.user %><% end %><% if @post.provider_url %>on <%= link_to @post.provider, @post.provider_url, :target => "_blank" %><% end %></p>
 	<p id="post-data">
 		<%=	render :partial => "data" %>
 	</p>
