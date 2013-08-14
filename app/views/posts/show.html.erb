@@ -29,7 +29,7 @@
 	<p><% if @post.author_name %>by <%= @post.author_name %><% end %></p>
 	<p><% if @post.user %>posted by <%= link_to @post.user.name, @post.user %><% end %><% if @post.provider_url %>on <%= link_to @post.provider, @post.provider_url, :target => "_blank" %><% end %></p>
 	<p id="post-data">
-		<%=	render :partial => "data" %>
+		<%=	render :partial => "data.html.erb" %>
 	</p>
 
 	<%= button_to  'Add 10 Views', {:controller => :posts, :action => :data, :method => :put,:num => 10 }, :remote => true, :'data-update-target' => 'post-update', :class => "btn", :id => "add_views"  %>
