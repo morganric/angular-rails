@@ -2,13 +2,14 @@ module PostsHelper
 
   def tweet
   puts "I am here!"
-  print "I am here!"
   @post = Post.find(params[:id])
 
   new_tweets = @post.tweets.to_i + 1
   new_views = @post.views.to_i + 50
   @post.update_attributes({:views => new_views, :tweets => new_tweets })
   @post.save
+
+   print "I am saved #{@post.tweets}!"
 
   respond_to do |format|
       if @post.update_attributes({:views => new_views, :tweets => new_tweets })
