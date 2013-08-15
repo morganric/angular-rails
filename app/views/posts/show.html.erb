@@ -24,29 +24,44 @@
 </div>
 <div class="span4">
 
-	<p><% if @post.thumbnail_url %><%= image_tag @post.thumbnail_url %><% end %></p>
-	<p><% if @post.description %><%= @post.description %><% end %></p>
-	<p><% if @post.author_name %>by <%= @post.author_name %><% end %></p>
-	<p><% if @post.user %>posted by <%= link_to @post.user.name, @post.user %><% end %><% if @post.provider_url %> via <%= link_to @post.provider, @post.provider_url, :target => "_blank" %><% end %></p>
-	<p id="post-data">
-		<%=	render :partial => "data" %>
+	<p ><% if @post.thumbnail_url %><%= image_tag @post.thumbnail_url, :class => "img-polaroid" %><% end %></p>
+
+	<section class="clearfix">
+		<div id="post-data" class="pull-left" >
+				<%=	render :partial => "data" %>
+		</div>
+		<div class="pull-right">
+			<ul id="share-nav" class="clearfix">
+				<li>	
+					<a id='tweet-button' href="#"></a>
+				</li>
+				<li>
+					<% if can? :data, @post %>
+					<%= button_to  'Add 10 Views', {:controller => :posts, :action => :data, :method => :put,:num => 10 }, :remote => true, :'data-update-target' => 'post-update', :class => "btn btn-mini btn-success", :id => "add_views" %>
+					<% end %> 
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<p class="well">
+		<% if @post.description %><%= @post.description %><% end %><br/>
+		<em><% if @post.author_name %>by <%= @post.author_name %><% end %></em>
 	</p>
-
-	<% if can? :data, @post %>
-	<%= button_to  'Add 10 Views', {:controller => :posts, :action => :data, :method => :put,:num => 10 }, :remote => true, :'data-update-target' => 'post-update', :class => "btn", :id => "add_views"  %>
-	<% end %>
-	<h3>Share: <a id='tweet-button' href="#"></a></h3>
-
-	
-
 	<p>
-		<code> <%= "#{request.protocol + request.host_with_port}/posts/#{@post.id}" %> </code>
+		<% if @post.user %>posted by <%= link_to @post.user.name, @post.user %><% end %>
+		<% if @post.provider_url %>, via <%= link_to @post.provider, @post.provider_url, :target => "_blank" %>
+		<% end %>
 	</p>
-
+	<section>
+		<code> <%= "#{request.protocol + request.host_with_port}/posts/#{@post.id}" %> </code>
+	</section>
 	<p id="post-id" class="hidden"><%= @post.id %></p>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+	<section class="pull-right">
+		<%= link_to 'Edit', edit_post_path(@post) %> |
+		<%= link_to 'Back', posts_path %>
+	</section>
 </div>
 </div>
 
@@ -61,16 +76,17 @@
 		     // twttr.widgets.load();
 
 				twttr.widgets.createShareButton(
-					'www.twitter.com' ,
+					'<%= j "#{request.protocol + request.host_with_port}/posts/#{@post.id}" %>' ,
 					  document.getElementById('tweet-button'),
 					  function (el) {
 					    console.log("Tweet Button created.")
 					  },
 					  {
-					    text: 'testing @twitterapi intents',
-					    url: 'http;//twitter.com', 
+					    text: '<%= j "#{@post.title.html_safe} #{request.protocol + request.host_with_port}/posts/#{@post.id}" %>',
+					    url: '<%= j "#{request.protocol + request.host_with_port}/posts/#{@post.id}" %>', 
 					    count: 'none',
-					    hashtags: 'twttr'
+					    hashtags: 'twttr',
+					    via: 'virallytesting'
 
 					  }
 					);

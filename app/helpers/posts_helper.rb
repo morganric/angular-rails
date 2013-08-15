@@ -6,7 +6,7 @@ module PostsHelper
   @post = Post.find(params[:id])
 
   new_tweets = @post.tweets.to_i + 1
-  new_views = @post.views.to_i + 100
+  new_views = @post.views.to_i + 50
   @post.update_attributes({:views => new_views, :tweets => new_tweets })
   @post.save
 

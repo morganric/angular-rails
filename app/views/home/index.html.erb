@@ -23,16 +23,22 @@
 	  	<i class="icon-white icon-twitter"></i>
 	  	{{post.tweets}}
 	  </span>	
+	  <hr/>	
 	</li>
 </ul>
 </div>
 <div class="span4">
-<label>Sort by:</label>
-<select ng-model="orderProp">
-  <option value="title">Alphabetical</option>
-  <option value="-views" selected="selected">Views Remaining</option>
-  <!-- <option value="-total" selected="selected">Total Views</option> -->
-</select>
+	<section class="well">
+		<h1>About Virally</h1>
+		<p>A simple app for sharing expirng links to rich media content</p>
+
+	</section>
+		<label>Sort by:</label>
+		<select ng-model="orderProp">
+		  <option value="title">Alphabetical</option>
+		  <option value="-views" selected="selected">Views Remaining</option>
+		  <option value="-total" selected="selected">Total Views</option>
+		</select>
 
 
 </div>
