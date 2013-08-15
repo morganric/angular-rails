@@ -1,5 +1,31 @@
 module PostsHelper
 
+  def tweet
+  puts "I am here!"
+  print "I am here!"
+  @post = Post.find(params[:id])
+
+  new_tweets = @post.tweets.to_i + 1
+  new_views = @post.views.to_i + 100
+  @post.update_attributes({:views => new_views, :tweets => new_tweets })
+  @post.save
+
+  respond_to do |format|
+      if @post.update_attributes({:views => new_views, :tweets => new_tweets })
+  #         # format.html { render :partial => 'data', :content_type => 'text/html', notice: "#{num} Views were added." }
+  #          # format.js { render :partial => 'data', :content_type => 'text/javascript', notice: "#{num} Views were added." }
+          format.json { head :no_content }
+           format.js 
+  #          format.html { redirect_to :back, :remote => true }
+      else
+  #       # format.html { render :partial => 'data', :content_type => 'text/html', status: :unprocessable_entity }
+        format.json { head :no_content }
+         format.js { redirect_to @post, notice: "No views were added."}
+  #        format.html { redirect_to :back, :remote => true } 
+      end
+    end
+  end
+
  def data
     @post = Post.find(params[:id])
     @views = @post.views
@@ -17,8 +43,8 @@ module PostsHelper
            format.html { redirect_to :back, :remote => true }
       else
         # format.html { render :partial => 'data', :content_type => 'text/html', status: :unprocessable_entity }
-         format.js { render :partial => 'data', :content_type => 'text/javascript', notice: "No views were added."}
-         format.html { redirect_to :back, :remote => true }
+         format.js { redirect_to @post, notice: "No views were added."}
+         format.html { redirect_to :back, :remote => true } 
       end
     end
   end

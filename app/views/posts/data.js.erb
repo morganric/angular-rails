@@ -1,0 +1,3 @@
+$('#post-data')
+	.empty()
+	.append('<%= j render :partial => "posts/data", :content_type => "text/javascript", :locals => {:post => @post} %>');

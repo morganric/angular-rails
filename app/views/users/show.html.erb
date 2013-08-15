@@ -1,9 +1,13 @@
 <h1><%= @user.name %></h1>
+
+<span class="label label-info">Total views: <i class="icon-white icon-eye-open" ></i> <%= @total %></span>
+
 <div class="row">
 	<ul>
 		<% @user.posts.each do |post| %>
 		<li>
-			<h3><%= link_to post.title, post %></h3>
+			<h3><%= link_to post.title, post %> <span class="label label-info"><i class="icon-white icon-eye-open" ></i> <%= post.total %></span></h3>
+
 		</li>
 		<% end %>
 

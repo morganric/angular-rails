@@ -9,6 +9,15 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = @user.posts
+    @total = 0
+
+    @user.posts.each do |post|
+      @total = @total + post.total
+  
+    end  
+
+    @total
+
   end
   
   def update

@@ -275,6 +275,7 @@ DEPENDENCIES
   guard-rspec
   hub
   jquery-rails
+  json
   launchy
   pg
   querystring (~> 0.1.0)

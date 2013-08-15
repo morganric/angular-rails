@@ -21,6 +21,7 @@ gem 'debugger'
 gem 'bootswatch-rails'
 gem 'embedly'
 gem "querystring", "~> 0.1.0"
+gem 'json'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]

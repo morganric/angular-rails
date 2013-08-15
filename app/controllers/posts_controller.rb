@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
   include PostsHelper
+  require 'json'
 
   load_and_authorize_resource
   skip_authorize_resource :only => [:show, :index]
-
 
 
   # GET /posts
@@ -74,7 +74,7 @@ class PostsController < ApplicationController
       @post.total = 0
       @post.increases = 0
       @post.views = 100
-      @post.user_id = current_user.id
+      @post.user = current_user
 
 
       embedly_title(@post)

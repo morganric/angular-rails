@@ -18,6 +18,10 @@
 	  <span class="label label-success">
 	  	<i class="icon-white icon-arrow-up"></i>
 	  	{{post.increases}}
+	  </span>
+	  <span class="label label-twitter">
+	  	<i class="icon-white icon-twitter"></i>
+	  	{{post.tweets}}
 	  </span>	
 	</li>
 </ul>
@@ -27,7 +31,7 @@
 <select ng-model="orderProp">
   <option value="title">Alphabetical</option>
   <option value="-views" selected="selected">Views Remaining</option>
-  <option value="-total" selected="selected">Total Views</option>
+  <!-- <option value="-total" selected="selected">Total Views</option> -->
 </select>
 
 
